@@ -1,5 +1,5 @@
 use ruff_diagnostics::{Diagnostic, Edit, Fix, FixAvailability, Violation};
-use ruff_macros::{derive_message_formats, violation};
+use ruff_macros::{derive_message_formats, ViolationMetadata};
 use ruff_python_ast as ast;
 use ruff_source_file::LineRanges;
 use ruff_text_size::TextRange;
@@ -67,8 +67,8 @@ use crate::rules::ruff::rules::sequence_sorting::{
 /// the contents of `__all__`. While this rule's fix will
 /// never delete a comment, it might *sometimes* move a
 /// comment to an unexpected location.
-#[violation]
-pub struct UnsortedDunderAll;
+#[derive(ViolationMetadata)]
+pub(crate) struct UnsortedDunderAll;
 
 impl Violation for UnsortedDunderAll {
     const FIX_AVAILABILITY: FixAvailability = FixAvailability::Sometimes;

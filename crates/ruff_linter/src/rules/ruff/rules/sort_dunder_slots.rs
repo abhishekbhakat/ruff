@@ -3,7 +3,7 @@ use std::borrow::Cow;
 use itertools::izip;
 
 use ruff_diagnostics::{Applicability, Diagnostic, Edit, Fix, FixAvailability, Violation};
-use ruff_macros::{derive_message_formats, violation};
+use ruff_macros::{derive_message_formats, ViolationMetadata};
 use ruff_python_ast as ast;
 use ruff_python_semantic::Binding;
 use ruff_source_file::LineRanges;
@@ -55,8 +55,8 @@ use crate::Locator;
 /// comments should be moved to when sorting the contents of `__slots__`.
 /// While this rule's fix will never delete a comment, it might *sometimes*
 /// move a comment to an unexpected location.
-#[violation]
-pub struct UnsortedDunderSlots {
+#[derive(ViolationMetadata)]
+pub(crate) struct UnsortedDunderSlots {
     class_name: ast::name::Name,
 }
 
